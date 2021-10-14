@@ -28,16 +28,6 @@ namespace APInet5.Controllers
 
             return retorno;
         }
-
-        // [HttpGet]
-        // public string GetWsdl()
-        // {
-        //     var xmlString = "https://apps.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente?wsdl";
-
-        //     var result = System.Text.Json.JsonSerializer.Serialize(XmlConvert.GetXmlData(XElement.Parse(xmlString)));
-
-        //     return "teste";
-        // }
         
         [HttpGet("{id}")]
         public string GetById(string id)
