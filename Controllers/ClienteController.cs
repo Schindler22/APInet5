@@ -64,13 +64,31 @@ namespace APInet5.Controllers
         {
             var resultado = _context.Clientes.Where(w => w.Id == cliente.Id).SingleOrDefault();
 
-            resultado.Nome = cliente.Nome == "" ? resultado.Nome : cliente.Nome;
-            resultado.Email = cliente.Email == "" ? resultado.Email : cliente.Email;
-            resultado.Nascimento = cliente.Nascimento == "" ? resultado.Nascimento : cliente.Nascimento;
-
+            if(cliente.Nome != "")
+            {
+                resultado.Nome = resultado.Nome == cliente.Nome ? resultado.Nome : cliente.Nome;
+            }
+            if(cliente.Email != "")
+            {
+                resultado.Email = resultado.Email == cliente.Email ? resultado.Email : cliente.Email;
+            }
+            if(cliente.Nascimento)
+            {
+                resultado.Nascimento = resultado.Nascimento == cliente.Nascimento ? resultado.Nascimento : cliente.Nascimento;
+            }
+           
             _context.SaveChanges();
 
-            return $"Dados criados:\nId: {cliente.Id}\nNome: {cliente.Nome}\nNascimento: {cliente.Nascimento}\nE-mail: {cliente.Email}";
+            if(resultado == null)
+            {
+                return $"ID: {cliente.Id} não encontrado!" 
+            }
+            else
+            {
+                return $"Dados criados:\nId: {cliente.Id}\nNome: {cliente.Nome}\nNascimento: {cliente.Nascimento}\nE-mail: {cliente.Email}";
+            }
+
+            
         }
 
         [HttpPatch]
